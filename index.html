@@ -3,30 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPTV Web Player</title>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <title>DASH Player</title>
+    <link href="https://cdn.jsdelivr.net/npm/video.js/dist/video-js.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/video.js/dist/video.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-dash/dist/videojs-dash.js"></script>
 </head>
 <body>
-
-    <h1>IPTV Web Player</h1>
-    <video id="video" controls autoplay width="80%"></video>
+    <h2>Live Stream Player</h2>
+    <video id="videoPlayer" class="video-js vjs-default-skin" controls autoplay width="640" height="360">
+        <source src="https://play.denver1769.fun/J/index.mpd?id=1984" type="application/dash+xml">
+    </video>
 
     <script>
-        var video = document.getElementById('video');
-        var streamUrl = "https://cors-anywhere.herokuapp.com/https://play.denver1769.fun/J/index.mpd?id=1984"; // Replace with IPTV stream
-
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource(streamUrl);
-            hls.attachMedia(video);
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = streamUrl;
-        }
+        var player = videojs('videoPlayer', {
+            techOrder: ["html5", "dash"]
+        });
     </script>
-
 </body>
 </html>
-
-
-
-
